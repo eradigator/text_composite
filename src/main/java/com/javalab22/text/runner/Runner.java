@@ -2,20 +2,20 @@ package com.javalab22.text.runner;
 
 import com.javalab22.text.entity.Text;
 import com.javalab22.text.entity.Sentence;
+import com.javalab22.text.entity.WordAndPunctuation;
 import com.javalab22.text.operation.Print;
 import com.javalab22.text.util.InputFromFile;
 import com.javalab22.text.util.OutputToFile;
 
-import java.util.ArrayList;
+import java.io.FileInputStream;
 import java.util.List;
-import java.util.regex.Pattern;
-
 
 /**
  * Разобрать исходный текст на составляющие (параграф, предложение, слово, символ)
  * Собрать заново из составляющих, и вывести.
  * Исходный текст и результат должны быть идентичны
  */
+
 public class Runner {
     public static void main(String[] args) {
 
@@ -30,31 +30,20 @@ public class Runner {
         Print print = new Print();
         print.printArrayList(text.getText());
 
-        //Разбиение на строки
-        Sentence sentence = new Sentence();
-        List<String> list = sentence.sentenceSplit(text);
-        print.printArrayList(list);
+        List<String> sentences = (new Sentence()).split(text.getText());
+        print.printArrayList(sentences);
 
-        //Разбиение на слова
-        List<String> words = new ArrayList<String>();
-        Pattern p = Pattern.compile("\\s|\\@\\#");
+        List<String> words = (new WordAndPunctuation().split(sentences));
+        print.printArrayList(words);
 
-        for (String s : list) {
-            s = s.replace(",","@#,@#");
-            s = s.replace(".","@#.@#");
-            s = s.replace("!","@#!@#");
-            s = s.replace("?","@#?@#");
-            s = s.replace(":","@#:@#");
-            s = s.replace(";","@#;@#");
+        //in.readFile();
 
-            for (String s1 : p.split(s)) {
-                words.add(s1);
-            }
-        }
+        //попробовать
+        /*FileInputStream inFile = new FileInputStream("text.txt");
+        byte[] str = new byte[inFile.available()];
+        inFile.read(str);
+        String text = new String(str);*/
 
-        for (String s : words) {
-            System.out.println(s);
-        }
     }
 }
 
