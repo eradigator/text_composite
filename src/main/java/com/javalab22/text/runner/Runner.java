@@ -2,6 +2,7 @@ package com.javalab22.text.runner;
 
 import com.javalab22.text.entity.Text;
 import com.javalab22.text.entity.Sentence;
+import com.javalab22.text.operation.Print;
 import com.javalab22.text.util.InputFromFile;
 import com.javalab22.text.util.OutputToFile;
 
@@ -26,23 +27,26 @@ public class Runner {
         OutputToFile out = new OutputToFile();
         out.outputToFile(text);
 
-        /*System.out.println("Весь текст: ");
-        for (String s : text.getText()) {
-            System.out.println(s);
-        }*/
+        Print print = new Print();
+        print.printArrayList(text.getText());
 
         //Разбиение на строки
         Sentence sentence = new Sentence();
         List<String> list = sentence.sentenceSplit(text);
+        print.printArrayList(list);
 
-        /*for (String s : list) {
-            System.out.println(s);
-        }*/
-
+        //Разбиение на слова
         List<String> words = new ArrayList<String>();
-        Pattern p = Pattern.compile("\\s");
+        Pattern p = Pattern.compile("\\s|\\@\\#");
 
         for (String s : list) {
+            s = s.replace(",","@#,@#");
+            s = s.replace(".","@#.@#");
+            s = s.replace("!","@#!@#");
+            s = s.replace("?","@#?@#");
+            s = s.replace(":","@#:@#");
+            s = s.replace(";","@#;@#");
+
             for (String s1 : p.split(s)) {
                 words.add(s1);
             }
