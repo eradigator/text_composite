@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
  */
 public class Sentence {
 
-
     public List<String> sentenceSplit(Text text) {
 
         List<String> sentences = new ArrayList<String>();
@@ -24,15 +23,8 @@ public class Sentence {
             }
         }
 
-        for (String s : sentences) {
-            System.out.println(s);
-        }
-
         return sentences;
     }
-
-
-
 
 
 }
