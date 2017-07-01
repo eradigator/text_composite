@@ -14,12 +14,14 @@ public class OutputToFile {
         try {
             Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("result.txt"), "cp1251"));
 
-            for (int i = 0; i < text.getSize(); i++) {
+          /*  for (int i = 0; i < text.getSize(); i++) {
                 out.append(text.getElement(i));
                 if (i != text.getSize() - 1) {
                     out.append(System.getProperty("line.separator"));
                 }
-            }
+            }*/
+
+            out.append(text.getText());
 
             out.close();
 
