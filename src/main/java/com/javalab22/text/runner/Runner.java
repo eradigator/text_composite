@@ -20,29 +20,22 @@ public class Runner {
     public static void main(String[] args) {
 
         Text text = new Text();
-
         InputFromFile in = new InputFromFile();
-        in.inputFromFile(text);
+        text.setText(in.readFile("text.txt"));
+        System.out.println(text.getText());
 
         OutputToFile out = new OutputToFile();
         out.outputToFile(text);
 
-        Print print = new Print();
-        print.printArrayList(text.getText());
 
+        Print print = new Print();
+
+        /*
         List<String> sentences = (new Sentence()).split(text.getText());
         print.printArrayList(sentences);
 
         List<String> words = (new WordAndPunctuation().split(sentences));
-        print.printArrayList(words);
-
-        //in.readFile();
-
-        //попробовать
-        /*FileInputStream inFile = new FileInputStream("text.txt");
-        byte[] str = new byte[inFile.available()];
-        inFile.read(str);
-        String text = new String(str);*/
+        print.printArrayList(words);*/
 
     }
 }
