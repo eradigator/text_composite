@@ -8,13 +8,18 @@ import java.util.List;
  */
 public class Text {
 
-    private String text;
+    private List<String> text = new ArrayList<String>();
 
-    public String getText() {
+    public List<String> getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(List<String> text) {
         this.text = text;
     }
+
+    public void addText(String text) {
+        this.text.add(text);
+    }
+
 }

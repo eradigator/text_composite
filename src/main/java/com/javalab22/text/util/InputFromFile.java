@@ -9,24 +9,6 @@ import java.io.*;
  */
 public class InputFromFile {
 
-    private String inputFileName = "text.txt";
-
-   /* public void inputFromFile(Text text) {
-        try {
-            InputStream fileInputStream = new FileInputStream("text.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream, "cp1251"));
-
-            String s;
-            while ((s = br.readLine()) != null) {
-                text.getText().add(s);
-            }
-            fileInputStream.close();
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
-
     public String readFile(String fileName) {
 
         try {
