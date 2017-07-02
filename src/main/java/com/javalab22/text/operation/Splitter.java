@@ -30,11 +30,9 @@ public class Splitter {
 
     private TextComposite parseToParagraph(TextComposite wholeText, String text) {
         TextComposite paragraphList = new TextComposite();
-        Pattern pattertParagraph = Pattern.compile(REGEX_PARAGRAPH);
-        //Symbol paragraphLeaf;
+        Pattern pattern = Pattern.compile(REGEX_PARAGRAPH);
         String paragraph;
-        //System.out.print(text);
-        Matcher matcher = pattertParagraph.matcher(text);
+        Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             paragraph = matcher.group();
             paragraphList = parseToSentense(paragraphList, paragraph);
@@ -84,7 +82,7 @@ public class Splitter {
             wordSign = matcher.group();
             wordSignList = parseToSymbol(wordSignList, wordSign);
             wordList.add(wordSignList);
-            System.out.println(wordSign);
+            //System.out.println(wordSign);
         }
         return wordList;
     }
@@ -94,11 +92,11 @@ public class Splitter {
         Pattern pattern = Pattern.compile(REGEX_SYMBOL);
         String symbol;
         Matcher matcher = pattern.matcher(wordSign);
-        //Symbol symbolList;
+        Symbol symbolList;
         while (matcher.find()) {
             symbol = matcher.group();
-            //symbolList = new Symbol(symbol);
-            System.out.println(symbol);
+            symbolList = new Symbol(symbol);
+            //System.out.println(symbol);
             //symbolList.print();
         }
         return wordSignList;

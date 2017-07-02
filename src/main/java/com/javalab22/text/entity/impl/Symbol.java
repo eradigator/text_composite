@@ -25,6 +25,6 @@ public class Symbol implements TextComponent {
     }
 
     public void print() {
-        System.out.print(symbol);
+        System.out.print("123123");
     }
 }

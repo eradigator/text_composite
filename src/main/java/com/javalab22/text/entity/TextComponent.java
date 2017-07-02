@@ -10,7 +10,9 @@ package com.javalab22.text.entity;
 public interface TextComponent {
 
     void add(TextComponent textComponent);
+
     TextComponent get(int index);
+    
     void print();
 
 }
