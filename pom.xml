@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.javalab22</groupId>
-  <artifactId>text</artifactId>
+  <artifactId>textSample</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>text</name>
+  <name>textSample</name>
   <url>http://maven.apache.org</url>
 
   <properties>
