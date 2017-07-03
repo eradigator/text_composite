@@ -24,7 +24,7 @@ public class TextComposite implements TextComponent {
 
     public void print() {
         for (TextComponent textComponent : components) {
-            //тут надо что-то придумать
+            //тут надо что-то придумать 
             textComponent.print();
         }
     }
