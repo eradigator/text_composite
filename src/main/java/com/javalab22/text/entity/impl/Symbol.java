@@ -4,7 +4,7 @@ import com.javalab22.text.entity.TextComponent;
 
 /**
  * Created by erad on 02.07.2017.
- * Leaf
+ * CompositePattern.Leaf
  */
 
 
@@ -16,15 +16,21 @@ public class Symbol implements TextComponent {
         this.symbol = symbol;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     public void add(TextComponent textComponent) {
         throw new UnsupportedOperationException();
     }
 
-    public TextComponent get(int index) {
-        return this;
+    @Override
+    public String toString() {
+        return symbol;
     }
 
-    public void print() {
-        System.out.print("123123");
-    }
 }

@@ -1,5 +1,6 @@
 package com.javalab22.text.runner;
 
+import com.javalab22.text.entity.TextComponent;
 import com.javalab22.text.entity.impl.TextComposite;
 import com.javalab22.text.operation.Print;
 import com.javalab22.text.operation.Splitter;
@@ -17,7 +18,7 @@ public class Runner {
 
         String s = new Input().readFile("text.txt");
         Splitter splitter = new Splitter();
-        TextComposite wholeText = splitter.split(s);
+        TextComponent wholeText = splitter.split(s);
 
         Print print = new Print();
 

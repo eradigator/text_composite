@@ -1,1 +1,0 @@
-com.javalab22.text.entity.impl.TextComposite@6824be
