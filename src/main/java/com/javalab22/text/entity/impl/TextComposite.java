@@ -18,6 +18,10 @@ public class TextComposite implements TextComponent {
         components.add(textComposite);
     }
 
+    public int getSize(TextComponent textComposite) {
+        return components.size();
+    }
+
     @Override
     public String toString() {
         String s = "";
