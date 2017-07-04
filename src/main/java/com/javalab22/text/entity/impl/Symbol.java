@@ -23,7 +23,6 @@ public class Symbol implements TextComponent {
     @Override
     public String toString()
     {
-        //return String.valueOf(symbol);
         return symbol;
     }
 }

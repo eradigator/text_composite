@@ -28,12 +28,13 @@ public class Splitter {
     private TextComposite parseToParagraph(TextComposite wholeText, String text) {
         TextComposite paragraphList = new TextComposite();
         String paragraph;
-
         Matcher matcher = Pattern.compile(REGEX_PARAGRAPH).matcher(text);
+
         while (matcher.find()) {
             paragraph = matcher.group();
             paragraphList = parseToSentence(paragraphList, paragraph);
         }
+
         wholeText.add(paragraphList);
         return wholeText;
     }
@@ -42,9 +43,7 @@ public class Splitter {
 
         TextComposite sentenceList = new TextComposite();
         String sentence;
-
-        Pattern p = Pattern.compile(REGEX_SENTENCE);
-        Matcher m = p.matcher(paragraph);
+        Matcher m = Pattern.compile(REGEX_SENTENCE).matcher(paragraph);
 
         while (m.find()) {
             sentence = m.group();
@@ -56,29 +55,30 @@ public class Splitter {
     }
 
     private TextComposite parseToSignAndWord(TextComposite wordList, String word) {
+
         TextComposite wordSignList = new TextComposite();
-        Pattern p = Pattern.compile(REGEX_WORD_AND_SIGN);
-        Matcher matcher = p.matcher(word);
         String wordSign;
+        Matcher matcher = Pattern.compile(REGEX_WORD_AND_SIGN).matcher(word);
 
         while (matcher.find()) {
             wordSign = matcher.group();
             wordSignList = parseToSymbol(wordSignList, wordSign);
         }
+
         wordList.add(wordSignList);
         return wordList;
     }
 
     private TextComposite parseToSymbol(TextComposite wordSignList, String wordSign) {
 
-        Pattern p = Pattern.compile(REGEX_SYMBOL);
-        String symbol;
-        Matcher matcher = p.matcher(wordSign);
-        Symbol symbolList;
+        Symbol symbol;
+        String symbolFromMatcher;
+        Matcher matcher = Pattern.compile(REGEX_SYMBOL).matcher(wordSign);
+
         while (matcher.find()) {
-            symbol = matcher.group();
-            symbolList = new Symbol(symbol);
-            wordSignList.add(symbolList);
+            symbolFromMatcher = matcher.group();
+            symbol = new Symbol(symbolFromMatcher);
+            wordSignList.add(symbol);
         }
         return wordSignList;
     }
