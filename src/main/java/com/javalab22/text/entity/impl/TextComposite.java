@@ -18,26 +18,14 @@ public class TextComposite implements TextComponent {
         components.add(textComposite);
     }
 
-    public void remove(TextComponent textComposite) {
-        components.remove(textComposite);
-    }
-
-
-    public List<TextComponent> get() {
-        return components;
-    }
-
     @Override
     public String toString() {
         String s = "";
-        //StringBuilder stringBuilder = new StringBuilder();
 
         for (TextComponent textComposite : components) {
             s += textComposite;
-            //stringBuilder.append(textComposite);
         }
 
         return s;
-        //return stringBuilder.toString();
     }
 }

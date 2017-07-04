@@ -10,27 +10,20 @@ import com.javalab22.text.entity.TextComponent;
 
 public class Symbol implements TextComponent {
 
-    private String symbol;
+    private char symbol;
 
-    public Symbol(String symbol) {
+    public Symbol(char symbol) {
         this.symbol = symbol;
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public void add(TextComponent textComponent) {
+    public void add(TextComponent textComposite) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public String toString() {
-        return symbol;
+    public String toString()
+    {
+        return String.valueOf(symbol);
     }
-
 }
+
