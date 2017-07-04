@@ -1,5 +1,6 @@
 package com.javalab22.text.operation;
 
+import com.javalab22.text.entity.TextComponent;
 import com.javalab22.text.entity.impl.Symbol;
 import com.javalab22.text.entity.impl.TextComposite;
 
@@ -21,20 +22,18 @@ public class Splitter {
     public Splitter() {
     }
 
-    public TextComposite split(String text) {
-        TextComposite wholeText = new TextComposite();
-        wholeText = parseToParagraph(wholeText, text);
-        wholeText.print();
-        return wholeText;
+    public TextComponent split(String string) {
+        TextComponent text = new TextComposite();
+        text = parseToParagraph(text, string);
+        System.out.println(text.toString());
+        return text;
     }
 
-    private TextComposite parseToParagraph(TextComposite wholeText, String text) {
+    private TextComponent parseToParagraph(TextComponent wholeText, String text) {
         TextComposite paragraphList = new TextComposite();
-        Pattern pattertParagraph = Pattern.compile(REGEX_PARAGRAPH);
-        //Symbol paragraphLeaf;
+        Pattern pattern = Pattern.compile(REGEX_PARAGRAPH);
         String paragraph;
-        //System.out.print(text);
-        Matcher matcher = pattertParagraph.matcher(text);
+        Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             paragraph = matcher.group();
             paragraphList = parseToSentense(paragraphList, paragraph);
@@ -84,7 +83,7 @@ public class Splitter {
             wordSign = matcher.group();
             wordSignList = parseToSymbol(wordSignList, wordSign);
             wordList.add(wordSignList);
-            System.out.println(wordSign);
+            //System.out.println(wordSign);
         }
         return wordList;
     }
@@ -94,12 +93,12 @@ public class Splitter {
         Pattern pattern = Pattern.compile(REGEX_SYMBOL);
         String symbol;
         Matcher matcher = pattern.matcher(wordSign);
-        //Symbol symbolList;
+        Symbol symbolList;
         while (matcher.find()) {
             symbol = matcher.group();
-            //symbolList = new Symbol(symbol);
-            System.out.println(symbol);
-            //symbolList.print();
+            symbolList = new Symbol(symbol);
+            //System.out.println(symbol);
+            //System.out.print(symbolList);
         }
         return wordSignList;
     }
