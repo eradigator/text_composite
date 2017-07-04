@@ -9,12 +9,12 @@ import java.io.*;
  */
 public class Output {
 
-    public void writeFile(TextComponent text) {
+    public void writeFile(String text) {
 
         try {
             Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("result.txt"), "cp1251"));
 
-            out.append(text.toString());
+            out.append(text);
             out.close();
 
         } catch (IOException e) {
