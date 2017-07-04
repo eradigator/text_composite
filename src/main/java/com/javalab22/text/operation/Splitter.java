@@ -15,8 +15,7 @@ public class Splitter {
     public static final String REGEX_PARAGRAPH = "(\\s*(.+))";
     public static final String REGEX_SENTENCE = "([^(\\.|!|\\?)]+)(\\.|!|\\?)";
     public static final String REGEX_WORD_AND_SIGN = "([\\.,!\\?:;@]{1})|([^\\.,!\\?:;@]*)";
-    public static final String REGEX_SYMBOL = ".{1}";
-
+    public static final String REGEX_SYMBOL = "(\\r\\n)|.{1}";
 
     public Splitter() {
     }
@@ -28,57 +27,58 @@ public class Splitter {
 
     private TextComposite parseToParagraph(TextComposite wholeText, String text) {
         TextComposite paragraphList = new TextComposite();
-        Pattern p = Pattern.compile(REGEX_PARAGRAPH);
         String paragraph;
-        Matcher matcher = p.matcher(text);
+        Matcher matcher = Pattern.compile(REGEX_PARAGRAPH).matcher(text);
+
         while (matcher.find()) {
             paragraph = matcher.group();
-            paragraphList = parseToSentense(paragraphList, paragraph);
+            paragraphList = parseToSentence(paragraphList, paragraph);
         }
+
         wholeText.add(paragraphList);
         return wholeText;
     }
 
-
-    private TextComposite parseToSentense(TextComposite paragraphList, String paragraph) {
+    private TextComposite parseToSentence(TextComposite paragraphList, String paragraph) {
 
         TextComposite sentenceList = new TextComposite();
-        Pattern p = Pattern.compile(REGEX_SENTENCE);
-        Matcher m2 = p.matcher(paragraph);
         String sentence;
-        while (m2.find()) {
-            sentence = m2.group();
+        Matcher m = Pattern.compile(REGEX_SENTENCE).matcher(paragraph);
+
+        while (m.find()) {
+            sentence = m.group();
             sentenceList = parseToSignAndWord(sentenceList, sentence);
         }
+
         paragraphList.add(sentenceList);
         return paragraphList;
     }
 
     private TextComposite parseToSignAndWord(TextComposite wordList, String word) {
+
         TextComposite wordSignList = new TextComposite();
-        Pattern p = Pattern.compile(REGEX_WORD_AND_SIGN);
-        Matcher matcher = p.matcher(word);
         String wordSign;
+        Matcher matcher = Pattern.compile(REGEX_WORD_AND_SIGN).matcher(word);
 
         while (matcher.find()) {
             wordSign = matcher.group();
             wordSignList = parseToSymbol(wordSignList, wordSign);
         }
+
         wordList.add(wordSignList);
         return wordList;
     }
 
     private TextComposite parseToSymbol(TextComposite wordSignList, String wordSign) {
 
-        Pattern p = Pattern.compile(REGEX_SYMBOL);
-        String symbol;
-        Matcher matcher = p.matcher(wordSign);
-        Symbol symbolList;
+        Symbol symbol;
+        String symbolFromMatcher;
+        Matcher matcher = Pattern.compile(REGEX_SYMBOL).matcher(wordSign);
+
         while (matcher.find()) {
-            symbol = matcher.group();
-            char ch = symbol.charAt(0);
-            symbolList = new Symbol(ch);
-            wordSignList.add(symbolList);
+            symbolFromMatcher = matcher.group();
+            symbol = new Symbol(symbolFromMatcher);
+            wordSignList.add(symbol);
         }
         return wordSignList;
     }

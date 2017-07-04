@@ -1,7 +1,5 @@
 package com.javalab22.text.util;
 
-import com.javalab22.text.entity.TextComponent;
-
 import java.io.*;
 
 /**
@@ -9,10 +7,10 @@ import java.io.*;
  */
 public class Output {
 
-    public void writeFile(String text) {
+    public void writeFile(String text,String outputFileName) {
 
         try {
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("result.txt"), "cp1251"));
+            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "cp1251"));
 
             out.append(text);
             out.close();

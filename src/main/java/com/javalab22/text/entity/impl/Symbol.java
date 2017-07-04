@@ -10,9 +10,9 @@ import com.javalab22.text.entity.TextComponent;
 
 public class Symbol implements TextComponent {
 
-    private char symbol;
+    private String symbol;
 
-    public Symbol(char symbol) {
+    public Symbol(String symbol) {
         this.symbol = symbol;
     }
 
@@ -23,7 +23,7 @@ public class Symbol implements TextComponent {
     @Override
     public String toString()
     {
-        return String.valueOf(symbol);
+        return symbol;
     }
 }
 
