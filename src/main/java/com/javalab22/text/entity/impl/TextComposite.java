@@ -22,6 +22,7 @@ public class TextComposite implements TextComponent {
         components.remove(textComposite);
     }
 
+
     public List<TextComponent> get() {
         return components;
     }
