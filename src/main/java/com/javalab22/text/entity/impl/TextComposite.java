@@ -24,12 +24,12 @@ public class TextComposite implements TextComponent {
 
     @Override
     public String toString() {
-        String s = "";
+        StringBuffer sb = new StringBuffer();
 
         for (TextComponent textComposite : components) {
-            s += textComposite;
+            sb.append(textComposite);
         }
 
-        return s;
+        return sb.toString();
     }
 }

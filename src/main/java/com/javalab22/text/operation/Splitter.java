@@ -22,24 +22,24 @@ public class Splitter {
 
     public TextComposite split(String inputText) {
         TextComposite text = new TextComposite();
-        return parseToParagraph(text, inputText);
+        return splitToParagraphs(text, inputText);
     }
 
-    private TextComposite parseToParagraph(TextComposite wholeText, String text) {
+    private TextComposite splitToParagraphs(TextComposite wholeText, String text) {
         TextComposite paragraphList = new TextComposite();
         String paragraph;
         Matcher matcher = Pattern.compile(REGEX_PARAGRAPH).matcher(text);
 
         while (matcher.find()) {
             paragraph = matcher.group();
-            paragraphList = parseToSentence(paragraphList, paragraph);
+            paragraphList = splitToSentences(paragraphList, paragraph);
         }
 
         wholeText.add(paragraphList);
         return wholeText;
     }
 
-    private TextComposite parseToSentence(TextComposite paragraphList, String paragraph) {
+    private TextComposite splitToSentences(TextComposite paragraphList, String paragraph) {
 
         TextComposite sentenceList = new TextComposite();
         String sentence;
@@ -47,29 +47,29 @@ public class Splitter {
 
         while (m.find()) {
             sentence = m.group();
-            sentenceList = parseToSignAndWord(sentenceList, sentence);
+            sentenceList = splitToWords(sentenceList, sentence);
         }
 
         paragraphList.add(sentenceList);
         return paragraphList;
     }
 
-    private TextComposite parseToSignAndWord(TextComposite wordList, String word) {
+    private TextComposite splitToWords(TextComposite wordList, String word) {
 
-        TextComposite wordSignList = new TextComposite();
+        TextComposite symbolList = new TextComposite();
         String wordSign;
         Matcher matcher = Pattern.compile(REGEX_WORD_AND_SIGN).matcher(word);
 
         while (matcher.find()) {
             wordSign = matcher.group();
-            wordSignList = parseToSymbol(wordSignList, wordSign);
+            symbolList = splitToSymbols(symbolList, wordSign);
         }
 
-        wordList.add(wordSignList);
+        wordList.add(symbolList);
         return wordList;
     }
 
-    private TextComposite parseToSymbol(TextComposite wordSignList, String wordSign) {
+    private TextComposite splitToSymbols(TextComposite symbolList, String wordSign) {
 
         Symbol symbol;
         String symbolFromMatcher;
@@ -78,9 +78,10 @@ public class Splitter {
         while (matcher.find()) {
             symbolFromMatcher = matcher.group();
             symbol = new Symbol(symbolFromMatcher);
-            wordSignList.add(symbol);
+            symbolList.add(symbol);
         }
-        return wordSignList;
+
+        return symbolList;
     }
 
 }
