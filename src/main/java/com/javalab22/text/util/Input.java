@@ -14,10 +14,11 @@ public class Input {
             InputStream fileInputStream = new FileInputStream(fileName);
             byte[] fileBytesArray = new byte[fileInputStream.available()];
             fileInputStream.read(fileBytesArray);
-            return new String(fileBytesArray, "cp1251");
+            return new String(fileBytesArray, "UTF-8");
 
         } catch (IOException e) {
-            e.getMessage();
+            System.out.println("Не найден файл");
+            e.getStackTrace();
         }
         return null;
     }

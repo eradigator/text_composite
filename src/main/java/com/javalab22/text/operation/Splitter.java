@@ -9,6 +9,9 @@ import java.util.regex.Pattern;
 
 /**
  * Created by erad on 02.07.2017.
+ * Разобрать исходный текст на составляющие (параграф, предложение, слово, символ)
+ * Собрать заново из составляющих, и вывести.
+ * Исходный текст и результат должны быть идентичны
  */
 
 public class Splitter {
@@ -17,7 +20,7 @@ public class Splitter {
     public static final String REGEX_SENTENCE = "([^(\\.|!|\\?)]+)(\\.|!|\\?)";
     public static final String REGEX_WORD = "([^(\\s)]*)(\\s)*";
     public static final String REGEX_WORD_AND_PUNCTUATION = "([\\.,!\\?:;@]{1})|([^\\.,!\\?:;@]*)";
-    public static final String REGEX_SYMBOL = "(\\r\\n)|.{1}";
+    public static final String REGEX_SYMBOL = "\\r|\\n|.{1}";
 
 
     public Splitter() {
@@ -76,7 +79,6 @@ public class Splitter {
         return sentenceList;
     }
 
-
     private TextComposite splitToWordAndPunctuation(TextComposite wordList, String word) {
 
         TextComposite wordSignList = new TextComposite();
@@ -101,7 +103,7 @@ public class Splitter {
 
         while (matcher.find()) {
             symbolFromMatcher = matcher.group();
-            symbol = new Symbol(symbolFromMatcher);
+            symbol = new Symbol(symbolFromMatcher.charAt(0));
             symbolList.add(symbol);
         }
 

@@ -10,7 +10,7 @@ public class Output {
     public void writeFile(String text,String outputFileName) {
 
         try {
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "cp1251"));
+            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
 
             out.append(text);
             out.close();
