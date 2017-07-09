@@ -1,5 +1,6 @@
 package com.javalab22.text.operation;
 
+import com.javalab22.text.entity.TypeOfTextComponent;
 import com.javalab22.text.entity.impl.Symbol;
 import com.javalab22.text.entity.impl.TextComposite;
 
@@ -14,8 +15,10 @@ public class Splitter {
 
     public static final String REGEX_PARAGRAPH = "(\\s*(.+))";
     public static final String REGEX_SENTENCE = "([^(\\.|!|\\?)]+)(\\.|!|\\?)";
-    public static final String REGEX_WORD_AND_SIGN = "([\\.,!\\?:;@]{1})|([^\\.,!\\?:;@]*)";
+    public static final String REGEX_WORD = "([^(\\s)]*)(\\s)*";
+    public static final String REGEX_WORD_AND_PUNCTUATION = "([\\.,!\\?:;@]{1})|([^\\.,!\\?:;@]*)";
     public static final String REGEX_SYMBOL = "(\\r\\n)|.{1}";
+
 
     public Splitter() {
     }
@@ -26,16 +29,18 @@ public class Splitter {
     }
 
     private TextComposite splitToParagraphs(TextComposite wholeText, String text) {
+
         TextComposite paragraphList = new TextComposite();
         String paragraph;
-        Matcher matcher = Pattern.compile(REGEX_PARAGRAPH).matcher(text);
+        Matcher m = Pattern.compile(REGEX_PARAGRAPH).matcher(text);
 
-        while (matcher.find()) {
-            paragraph = matcher.group();
+        while (m.find()) {
+            paragraph = m.group();
             paragraphList = splitToSentences(paragraphList, paragraph);
         }
 
         wholeText.add(paragraphList);
+        wholeText.setTypeOfTextComponent(TypeOfTextComponent.TEXT);
         return wholeText;
     }
 
@@ -47,25 +52,44 @@ public class Splitter {
 
         while (m.find()) {
             sentence = m.group();
-            sentenceList = splitToWords(sentenceList, sentence);
+            sentenceList = splitToWord(sentenceList, sentence);
         }
 
         paragraphList.add(sentenceList);
+        paragraphList.setTypeOfTextComponent(TypeOfTextComponent.PARAGRAPH);
         return paragraphList;
     }
 
-    private TextComposite splitToWords(TextComposite wordList, String word) {
+    private TextComposite splitToWord(TextComposite sentenceList, String sentence) {
 
-        TextComposite symbolList = new TextComposite();
+        TextComposite wordList = new TextComposite();
+        String word;
+        Matcher matcher = Pattern.compile(REGEX_WORD).matcher(sentence);
+
+        while (matcher.find()) {
+            word = matcher.group();
+            wordList = splitToWordAndPunctuation(wordList, word);
+        }
+
+        sentenceList.add(wordList);
+        sentenceList.setTypeOfTextComponent(TypeOfTextComponent.SENTENCE);
+        return sentenceList;
+    }
+
+
+    private TextComposite splitToWordAndPunctuation(TextComposite wordList, String word) {
+
+        TextComposite wordSignList = new TextComposite();
         String wordSign;
-        Matcher matcher = Pattern.compile(REGEX_WORD_AND_SIGN).matcher(word);
+        Matcher matcher = Pattern.compile(REGEX_WORD_AND_PUNCTUATION).matcher(word);
 
         while (matcher.find()) {
             wordSign = matcher.group();
-            symbolList = splitToSymbols(symbolList, wordSign);
+            wordSignList = splitToSymbols(wordSignList, wordSign);
         }
 
-        wordList.add(symbolList);
+        wordList.add(wordSignList);
+        wordList.setTypeOfTextComponent(TypeOfTextComponent.WORD);
         return wordList;
     }
 
@@ -81,6 +105,7 @@ public class Splitter {
             symbolList.add(symbol);
         }
 
+        symbolList.setTypeOfTextComponent(TypeOfTextComponent.SYMBOL);
         return symbolList;
     }
 

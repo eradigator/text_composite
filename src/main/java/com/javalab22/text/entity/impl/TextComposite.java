@@ -1,6 +1,7 @@
 package com.javalab22.text.entity.impl;
 
 import com.javalab22.text.entity.TextComponent;
+import com.javalab22.text.entity.TypeOfTextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +13,29 @@ import java.util.List;
 
 public class TextComposite implements TextComponent {
 
+    private TypeOfTextComponent typeOfTextComponent;
+
     private List<TextComponent> components = new ArrayList<TextComponent>();
+
+    public TypeOfTextComponent getTypeOfTextComponent() {
+        return typeOfTextComponent;
+    }
+
+    public void setTypeOfTextComponent(TypeOfTextComponent typeOfTextComponent) {
+        this.typeOfTextComponent = typeOfTextComponent;
+    }
 
     public void add(TextComponent textComposite) {
         components.add(textComposite);
     }
 
-    public int getSize(TextComponent textComposite) {
-        return components.size();
+    public List<TextComponent> getComponents() {
+        return components;
     }
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         for (TextComponent textComposite : components) {
             sb.append(textComposite);
