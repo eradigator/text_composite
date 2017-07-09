@@ -11,19 +11,19 @@ import com.javalab22.text.entity.TypeOfTextComponent;
 
 public class Symbol implements TextComponent {
 
-    private String symbol;
+    private char symbol;
 
     private TypeOfTextComponent typeOfTextComponent;
 
-    public Symbol(String symbol) {
+    public Symbol(char symbol) {
         this.symbol = symbol;
     }
 
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
+    public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
 
@@ -42,7 +42,7 @@ public class Symbol implements TextComponent {
     @Override
     public String toString()
     {
-        return symbol;
+        return String.valueOf(symbol);
     }
 }
 
